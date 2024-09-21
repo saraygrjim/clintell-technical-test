@@ -7,7 +7,7 @@ NON_TRENDING_TYPE = "non-trending"
 CUSTOM_TYPE       = "custom"
 SELL_ACTION       = "sell"
 BUY_ACTION        = "buy"
-DO_NOTHING_ACTION ="do-nothing"
+DO_NOTHING_ACTION = "do-nothing"
 
 class Agent:  
     def __init__(self, _type):
