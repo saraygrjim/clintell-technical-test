@@ -1,6 +1,7 @@
 import uuid
 import numpy as np
 import exceptions as e
+import random
 
 RANDOM_TYPE       = "random"
 TRENDING_TYPE     = "trending"
@@ -10,18 +11,23 @@ SELL_ACTION       = "sell"
 BUY_ACTION        = "buy"
 DO_NOTHING_ACTION = "do-nothing"
 
-def select_weighted_action(actions, weights):
+def select_weighted_action(actions, weights=None):
     if len(actions) == 1:
-        return actions[0]  # If there is only one action, then it is automatically selected
+        return actions[0]
+    if weights is None:
+        return random.choice(actions)
     return np.random.choice(actions, p=weights)
     
 class Agent:  
     def __init__(self, _type):
-        self.cards  = 0 
-        self.ID     = uuid.uuid4()
-        self.wallet = 1000
-        self.type   = _type
+        self.cards      = 0 
+        self.ID         = uuid.uuid4()
+        self.wallet     = 1000
+        self.type       = _type
+        self.lastAction = None
         
+    def GetStatus(self):
+        return self.ID, self.type, self.wallet, self.cards, self.lastAction
         
     def SelectAction(self, currentCardPrice, increment):
         actions = [DO_NOTHING_ACTION]
@@ -32,7 +38,7 @@ class Agent:
                 actions.append(SELL_ACTION)
             if self.wallet >= currentCardPrice:
                 actions.append(BUY_ACTION) 
-            action = np.random.choice(actions) 
+            action = select_weighted_action(actions) 
         
         elif self.type == TRENDING_TYPE:
             if increment >= 0.01 and self.wallet >= currentCardPrice: 
@@ -61,8 +67,7 @@ class Agent:
         else:
             raise e.InvalidAgentType(f"Invalid agent type: {self.type}")
 
-        
-        print(f'Agent {self.ID} has decided the action {action}.')
+        self.lastAction = action
         return action
     
     def Sell(self, currentCardPrice):
@@ -71,8 +76,6 @@ class Agent:
                     
         self.cards = self.cards - 1
         self.wallet = self.wallet + currentCardPrice
-        print(f'Agent {self.ID} has sold.')
-        self.printCurrentState()
         return
     
     def Buy(self, currentCardPrice):
@@ -82,11 +85,7 @@ class Agent:
 
         self.cards = self.cards + 1
         self.wallet = self.wallet - currentCardPrice
-        print(f'Agent {self.ID} has bought.')
-        self.printCurrentState()
         return
-        
-        
-    def printCurrentState(self):
-        print(f'Its current state is: Cards={self.cards}, Wallet={self.wallet}.')
     
+    
+   
