@@ -29,7 +29,7 @@ class Agent:
     def GetStatus(self):
         return self.ID, self.type, self.wallet, self.cards, self.lastAction
         
-    def SelectAction(self, currentCardPrice, increment, remainingDays): # dias +1 
+    def SelectAction(self, currentCardPrice, increment, remainingDays):  
         actions = [DO_NOTHING_ACTION]
         action = DO_NOTHING_ACTION
         
