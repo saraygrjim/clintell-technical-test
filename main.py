@@ -1,5 +1,5 @@
-from treasurer import Treasurer
-    
+from marketEnv.treasurer import Treasurer
+
 def main():
     t = Treasurer(1000)
     t.SimulateMarket()

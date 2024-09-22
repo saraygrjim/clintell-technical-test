@@ -1,6 +1,6 @@
 import uuid
 import numpy as np
-import exceptions as e
+import marketEnv.exceptions as e
 import random
 
 RANDOM_TYPE       = "random"

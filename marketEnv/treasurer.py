@@ -1,8 +1,8 @@
 
-from market import Market
-from agent import Agent, RANDOM_TYPE, TRENDING_TYPE, NON_TRENDING_TYPE, CUSTOM_TYPE, SELL_ACTION, BUY_ACTION
+from marketEnv.market import Market
+from marketEnv.agent import Agent, RANDOM_TYPE, TRENDING_TYPE, NON_TRENDING_TYPE, CUSTOM_TYPE, SELL_ACTION, BUY_ACTION
 import random
-import exceptions as e    
+import marketEnv.exceptions as e    
 import time
 import csv
 import os
@@ -25,6 +25,7 @@ class Treasurer:
                 print("===========")
                 summarizeMarket(i, self.agents, self.market)
                 time.sleep(0.1)
+        print(f"All data is stored in .tmp/{filename}")
             
     def InitDay(self, day):
         orderedAgents = sorted(self.agents, key=lambda y: random.randint(0, len(self.agents)))
