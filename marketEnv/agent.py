@@ -11,7 +11,7 @@ SELL_ACTION       = "sell"
 BUY_ACTION        = "buy"
 DO_NOTHING_ACTION = "do-nothing"
 
-def select_weighted_action(actions, weights=None):
+def selectWeightedAction(actions, weights=None):
     if len(actions) == 1:
         return actions[0]
     if weights is None:
@@ -38,23 +38,23 @@ class Agent:
                 actions.append(SELL_ACTION)
             if self.wallet >= currentCardPrice:
                 actions.append(BUY_ACTION) 
-            action = select_weighted_action(actions) 
+            action = selectWeightedAction(actions) 
         
         elif self.type == TRENDING_TYPE:
             if increment >= 0.01 and self.wallet >= currentCardPrice: 
                 actions.append(BUY_ACTION) 
-                action = select_weighted_action(actions, [0.25, 0.75]) 
+                action = selectWeightedAction(actions, [0.25, 0.75]) 
             elif self.cards > 0:
                 actions.append(SELL_ACTION)
-                action = select_weighted_action(actions, [0.80, 0.20]) 
+                action = selectWeightedAction(actions, [0.80, 0.20]) 
                 
         elif self.type == NON_TRENDING_TYPE:
             if increment <= -0.01 and self.wallet >= currentCardPrice:
                 actions.append(BUY_ACTION)
-                action = select_weighted_action(actions, [0.25, 0.75])
+                action = selectWeightedAction(actions, [0.25, 0.75])
             elif self.cards > 0: 
                 actions.append(SELL_ACTION)
-                action = select_weighted_action(actions, [0.80, 0.20])
+                action = selectWeightedAction(actions, [0.80, 0.20])
 
         elif self.type == CUSTOM_TYPE:
             if remainingDays == self.cards:
