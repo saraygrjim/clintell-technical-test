@@ -38,7 +38,7 @@ Este proyecto tiene su origen en una prueba técnica solicitada por la empresa C
 ## Requisitos
 
 - Python 3.9
-- Dependencias: consultar el fichero de [requisitos](requirements.tzt)
+- Dependencias: consultar el fichero de [requisitos](./requirements.txt)
 
 ## Instalación
 
