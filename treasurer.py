@@ -18,7 +18,7 @@ class Treasurer:
     def SimulateMarket(self):
         filename = f"market_simulation_{time.time()}.csv" 
         for i in range(self.days):
-            self.InitDay()
+            self.InitDay(i)
             writeSummaryToCSV(i, self.agents, self.market, filename)  # daily summary in csv
             if i % 10 == 0:
                 print(" DAY " + str(i))
@@ -26,12 +26,12 @@ class Treasurer:
                 summarizeMarket(i, self.agents, self.market)
                 time.sleep(0.1)
             
-    def InitDay(self):
+    def InitDay(self, day):
         orderedAgents = sorted(self.agents, key=lambda y: random.randint(0, len(self.agents)))
         for i in range(0, len(orderedAgents)):
             currentCardPrice = self.market.GetCurrentCardPrice()
             increment = self.market.CalculateIncrement()
-            action = orderedAgents[i].SelectAction(currentCardPrice, increment)
+            action = orderedAgents[i].SelectAction(currentCardPrice, increment, self.days - day)
             if action == SELL_ACTION:
                self.AgentSell(orderedAgents[i], currentCardPrice)
             

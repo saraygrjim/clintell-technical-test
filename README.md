@@ -26,7 +26,7 @@ Este proyecto tiene su origen en una prueba técnica solicitada por la empresa C
     - **RANDOM**: En cada iteración tienen 1/3 de probabilidades de comprar, 1/3 de probabilidades de vender y 1/3 de probabilidades de no hacer nada. En total hay *53 agentes* de este tipo.
     - **TRENDING**: En cada iteración tienen un 75% de probabilidades de comprar y un 25% de probabilidades de no hacer nada si el precio ha subido un 1% (o más) con respecto al final de la iteración. En total hay *24 agentes* de este tipo.
     - **NON-TRENDING**: En cada iteración tienen un 75% de probabilidades de comprar y un 25% de probabilidades de no hacer nada si el precio ha bajado un 1% (o más) con respecto al final de la iteración anterior. En caso contrario tienen un 20% de probabilidades de vender y un 80% de probabilidades de no hacer nada. En total hay *24 agentes* de este tipo.
-    - **CUSTOM**: lógica definida por ti con el objetivo de maximizar su balance económico al final de la simulación. El agente debe terminar la última iteración con cero tarjetas gráficas en su poder. En total hay *1 agente* de este tipo.
+    - **CUSTOM**: El agente debe terminar la última iteración con cero tarjetas gráficas en su poder, para ello en caso de que queden tantos días como tarjetas tiene en su poder, la solución a este problema siempre será vender. En el caso de que queden más días que tarjetas, venderemos siempre que el precio suba (y tengamos tarjetas) y compraremos siempre que el precio baje (siempre que tengamos dinero). En el resto de casos no haremos nada.  En total hay *1 agente* de este tipo.
   - Cada agente cuenta con un balance inicial de 1.000$
 
 - Asunciones

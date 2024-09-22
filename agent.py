@@ -29,7 +29,7 @@ class Agent:
     def GetStatus(self):
         return self.ID, self.type, self.wallet, self.cards, self.lastAction
         
-    def SelectAction(self, currentCardPrice, increment):
+    def SelectAction(self, currentCardPrice, increment, remainingDays): # dias +1 
         actions = [DO_NOTHING_ACTION]
         action = DO_NOTHING_ACTION
         
@@ -57,13 +57,19 @@ class Agent:
                 action = select_weighted_action(actions, [0.80, 0.20])
 
         elif self.type == CUSTOM_TYPE:
-            actions = []
-            if self.wallet >= currentCardPrice:
-                actions.append(BUY_ACTION)
-            if self.cards > 0:
-                actions.append(SELL_ACTION)
-            action = np.random.choice(actions)
-             
+            if remainingDays == self.cards:
+                return SELL_ACTION
+            elif remainingDays > self.cards:
+                if increment < 0 and self.wallet >= currentCardPrice:
+                   return BUY_ACTION
+                elif increment > 0 and self.cards > 0:
+                    return SELL_ACTION
+                else:
+                    return DO_NOTHING_ACTION
+            else: 
+                # this case never should be performed, but if it happens 
+                # the action is sell because the objective is maximize its balance 
+                return SELL_ACTION  
         else:
             raise e.InvalidAgentType(f"Invalid agent type: {self.type}")
 
