@@ -8,7 +8,7 @@ Este proyecto tiene su origen en una prueba técnica solicitada por la empresa C
   - [Tabla de Contenidos](#tabla-de-contenidos)
   - [Características](#características)
   - [Requisitos](#requisitos)
-  - [Instalación](#instalación)
+  - [Instalación y ejecución](#instalación-y-ejecución)
 
 ## Características
 
@@ -40,7 +40,7 @@ Este proyecto tiene su origen en una prueba técnica solicitada por la empresa C
 - Python 3.9
 - Dependencias: consultar el fichero de [requisitos](./requirements.txt)
 
-## Instalación
+## Instalación y ejecución
 
 1. Clona el repositorio:
    ```bash
